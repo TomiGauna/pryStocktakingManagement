@@ -187,7 +187,7 @@ namespace pryStocktakingManagement
         {
             if (txtDeleteCode.Text == "")
             {
-                MessageBox.Show("Please enter a code", "Product Removal: Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a code!", "Product Removal: Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
