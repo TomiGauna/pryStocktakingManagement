@@ -13,6 +13,7 @@ namespace pryStocktakingManagement
     public partial class frmSearch : Form
     {
         clsDataHandler handler = new clsDataHandler();
+        clsSQLHandler SQLH = new clsSQLHandler();
         public frmSearch()
         {
             InitializeComponent();
@@ -78,42 +79,41 @@ namespace pryStocktakingManagement
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            DataTable table;
             if (cboSearchField.Text == "Categoría")
             {
-                List<DataRow> list= handler.productInquiry(
+                table = SQLH.Reader(
                     cboSearchField.Text, 
                     cboCategoryOptions.Text
                     );
-
-                outputDisplay(list);
             }
             else
             {
-                List<DataRow> list = handler.productInquiry(
+                table = SQLH.Reader(
                     cboSearchField.Text,
                     txtCodeOrName.Text
                     );
-
-                outputDisplay(list);
             }
+            outputDisplay(table);
+
             cboCategoryOptions.SelectedIndex = -1;
             txtCodeOrName.Text = string.Empty;
         }
 
-        public void outputDisplay(List<DataRow> list)
+        public void outputDisplay(DataTable table)
         {
             dgvProducts.Rows.Clear();
-            foreach (DataRow rowShown in list)
+            foreach (DataRow row in table.Rows)
             {
                 dgvProducts.Rows.Add(
-                        rowShown["Código"],
-                        rowShown["Nombre"],
-                        rowShown["Descripción"],
-                        rowShown["Categoría"],
-                        rowShown["Precio"],
-                        rowShown["Stock"]
-                        );
-            };
+                    row["Código"],
+                    row["Nombre"],
+                    row["Descripción"],
+                    row["Categoría"],
+                    row["Precio"],
+                    row["Stock"]
+                    );
+            }
         }
     }
 }

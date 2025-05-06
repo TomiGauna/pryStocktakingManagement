@@ -13,6 +13,7 @@ namespace pryStocktakingManagement
     public partial class frmNewProduct : Form
     {
         clsDataHandler handler = new clsDataHandler();
+        clsSQLHandler SqlH = new clsSQLHandler();
         public frmNewProduct()
         {
             InitializeComponent();
@@ -74,6 +75,7 @@ namespace pryStocktakingManagement
 
             txtNewData.Enabled = false;
             cboNewData.Enabled = false;
+
         }
 
         private void btnSearchForm_Click(object sender, EventArgs e)
@@ -187,7 +189,7 @@ namespace pryStocktakingManagement
         {
             if (txtDeleteCode.Text == "")
             {
-                MessageBox.Show("Please enter a code!", "Product Removal: Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a code", "Product Removal: Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
