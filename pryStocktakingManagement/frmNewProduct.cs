@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
+
 
 namespace pryStocktakingManagement
 {
@@ -119,13 +121,13 @@ namespace pryStocktakingManagement
             }
             else
             {
-                handler.createProduct(
+                SqlH.Creator(
                 int.Parse(txtCode.Text),
                 txtName.Text,
                 rtxtDescription.Text,
                 cboCategory.Text,
-                double.Parse(txtPrice.Text),
-                (int)nudStock.Value
+                float.Parse(txtPrice.Text, CultureInfo.InvariantCulture),
+                Convert.ToInt32(nudStock.Value)
                 );
             }
 
@@ -148,11 +150,10 @@ namespace pryStocktakingManagement
                     )
                 {
                     MessageBox.Show("Please provide the needed information", "Product Update: Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                 }
                 else
                 {
-                    handler.updateProduct(
+                    SqlH.Updater(
                     int.Parse(txtChangeCode.Text),
                     cboField.Text,
                     cboNewData.Text
@@ -171,7 +172,7 @@ namespace pryStocktakingManagement
                 }
                 else
                 {
-                    handler.updateProduct(
+                    SqlH.Updater(
                     int.Parse(txtChangeCode.Text),
                     cboField.Text,
                     txtNewData.Text
@@ -193,7 +194,7 @@ namespace pryStocktakingManagement
             }
             else
             {
-                handler.deleteProduct(int.Parse(txtDeleteCode.Text));
+                SqlH.Remover(int.Parse(txtDeleteCode.Text));
             }
           
             txtDeleteCode.Text = string.Empty;
